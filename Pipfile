@@ -11,6 +11,7 @@ fire = "*"
 python_version = "3.7"
 
 [dev-packages]
+pytest = "*"
 
 [scripts]
 cli = "pipenv run python aeroplast.py"
