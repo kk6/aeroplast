@@ -5,8 +5,11 @@ Transparent PNG conversion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 """
+from pathlib import Path
+
 import fire
 from PIL import Image
+from logzero import logger
 
 
 def get_new_size(original_size):
@@ -21,8 +24,7 @@ def get_new_size(original_size):
     return tuple(x + 2 for x in original_size)
 
 
-def add_transparent_frame(src):
-    original_image = Image.open(src)
+def add_transparent_frame(original_image):
     new_size = get_new_size(original_image.size)
     color = (255, 255, 255, 0)
     image = Image.new(original_image.mode, new_size, color)
@@ -42,8 +44,19 @@ class CLI(object):
         :return: None
 
         """
-        image = add_transparent_frame(src)
-        image.save(dest, quality=100)
+        path = Path(src)
+        absolute_path = path.resolve()
+
+        logger.info(f"Open the image: {absolute_path}")
+        try:
+            original_image = Image.open(absolute_path)
+        except FileNotFoundError:
+            logger.error(f"Image not found: {absolute_path}")
+        else:
+            logger.info("Image converting...")
+            image = add_transparent_frame(original_image)
+            image.save(dest, quality=100)
+            logger.info(f"Image generation succeeded: {dest}")
 
 
 if __name__ == "__main__":
