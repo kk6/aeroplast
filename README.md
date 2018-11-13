@@ -5,18 +5,18 @@ Transparent PNG conversion (Mainly for Twitter)
 
 ### Install packages
 
-```python
+```shell
 $ pipenv install
 ```
 
 ### Convert image
 
-```python
+```shell
 $ pipenv run python aeroplast.py convert original.png converted.png
 ```
 ### help
 
-```python
+```shell
 $ pipenv run python aeroplast.py --help
 ```
 
