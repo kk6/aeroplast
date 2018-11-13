@@ -5,6 +5,7 @@ url = "https://pypi.org/simple"
 
 [packages]
 pillow = "*"
+fire = "*"
 
 [requires]
 python_version = "3.7"
