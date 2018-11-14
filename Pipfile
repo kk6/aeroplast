@@ -15,4 +15,4 @@ python_version = "3.7"
 pytest = "*"
 
 [scripts]
-cli = "pipenv run python aeroplast.py"
+cli = "pipenv run python -m aeroplast"

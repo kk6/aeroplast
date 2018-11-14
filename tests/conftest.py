@@ -24,5 +24,5 @@ def output_image_filename():
 
 @pytest.fixture(scope="function")
 def cli():
-    from aeroplast import CLI
+    from aeroplast.cli import CLI
     return CLI()
