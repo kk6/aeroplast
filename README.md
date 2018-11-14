@@ -9,15 +9,27 @@ Transparent PNG conversion (Mainly for Twitter)
 $ pipenv install
 ```
 
+### Invoke commands
+
+```shell
+$ pipenv run python -m aeroplast ...
+```
+
+or
+
+```shell
+$ pipenv run cli ...
+```
+
 ### Convert image
 
 ```shell
-$ pipenv run python aeroplast.py convert original.png converted.png
+$ pipenv run cli convert original.png converted.png
 ```
 ### help
 
 ```shell
-$ pipenv run python aeroplast.py --help
+$ pipenv run cli --help
 ```
 
 ## Origin of the name
