@@ -29,5 +29,5 @@ class CLI(object):
         else:
             logger.info("Image converting...")
             image = add_transparent_frame(original_image)
-            image.save(dest, quality=100)
+            image.save(dest)
             logger.info(f"Image generation succeeded: {dest}")

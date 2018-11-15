@@ -29,7 +29,7 @@ def add_transparent_frame(original_image):
 
     :param original_image: Original image
     :return: Image with transparent frame added.
-    :rtype: Image
+    :rtype: :py:class: `~PIL.Image.Image`
 
     """
     new_size = get_new_size(original_image.size)
@@ -37,7 +37,3 @@ def add_transparent_frame(original_image):
     image = Image.new("RGBA", new_size, color)
     image.paste(original_image, (1, 1))
     return image
-
-
-
-
