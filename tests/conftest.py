@@ -23,6 +23,11 @@ def output_image_filename():
 
 
 @pytest.fixture(scope="function")
+def resized_image():
+    return Image.open("tests/images/resized.png")
+
+
+@pytest.fixture(scope="function")
 def cli():
     from aeroplast.cli import CLI
     return CLI()

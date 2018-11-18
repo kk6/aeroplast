@@ -37,3 +37,17 @@ def add_transparent_frame(original_image):
     image = Image.new("RGBA", new_size, color)
     image.paste(original_image, (1, 1))
     return image
+
+
+def resize_image(image, size):
+    """
+    Resize the image to fit in the specified size.
+
+    :param image: Original image.
+    :param size: Tuple of (width, height).
+    :return: Resized image.
+    :rtype: :py:class: `~PIL.Image.Image`
+
+    """
+    image.thumbnail(size)
+    return image
