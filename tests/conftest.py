@@ -30,4 +30,5 @@ def resized_image():
 @pytest.fixture(scope="function")
 def cli():
     from aeroplast.cli import CLI
+
     return CLI()
