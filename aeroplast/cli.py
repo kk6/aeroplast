@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 from pathlib import Path
 from PIL import Image
 from logzero import logger
@@ -9,6 +10,26 @@ import aeroplast.paths as paths
 
 class CLI(object):
     """Transparent PNG conversion"""
+
+    def _get_paths(self, src, dest, prefix, overwrite):
+        path = Path(src)
+        absolute_path = paths.get_absolute_path(path)
+        name = paths.get_destination_filename(path, prefix, overwrite)
+        dest = paths.get_destination_path(dest, absolute_path, name)
+        return absolute_path, dest
+
+    def _open_image(self, absolute_path):
+        logger.info(f"Open the image: {absolute_path}")
+        try:
+            return Image.open(absolute_path)
+        except FileNotFoundError:
+            logger.error(f"Image not found: {absolute_path}")
+
+    def _resize_image(self, original_image, size):
+        logger.info(f"Resize the image to fit within {size[0]}*{size[1]} px.")
+        original_image = images.resize_image(original_image, size)
+        logger.info("Resize complete.")
+        return original_image
 
     def convert(self, src, dest=None, prefix="t", overwrite=False, resize=False):
         """
@@ -23,31 +44,24 @@ class CLI(object):
         :return: None
 
         """
-        path = Path(src)
-        absolute_path = paths.get_absolute_path(path)
-        name = paths.get_destination_filename(path, prefix, overwrite)
-        dest = paths.get_destination_path(dest, absolute_path, name)
+        absolute_path, dest = self._get_paths(src, dest, prefix, overwrite)
 
-        logger.info(f"Open the image: {absolute_path}")
-        try:
-            original_image = Image.open(absolute_path)
-        except FileNotFoundError:
-            logger.error(f"Image not found: {absolute_path}")
-        else:
-            if resize:
-                if resize is True:
-                    size = (1000, 1000)
-                else:
-                    size = (resize, resize)
+        original_image = self._open_image(absolute_path)
+        if original_image is None:
+            sys.exit(1)
 
-                logger.info(f"Resize the image to fit within {size[0]}*{size[1]} px.")
-                original_image = images.resize_image(original_image, size)
-                logger.info("Resize complete.")
+        if resize:
+            if resize is True:
+                size = (1000, 1000)
+            else:
+                size = (resize, resize)
 
-            logger.info("Image converting...")
-            image = images.add_transparent_frame(original_image)
-            image.save(dest)
-            logger.info(f"Image generation succeeded: {dest}")
+            original_image = self._resize_image(original_image, size)
+
+        logger.info("Image converting...")
+        image = images.add_transparent_frame(original_image)
+        image.save(dest)
+        logger.info(f"Image generation succeeded: {dest}")
 
     def resize(self, src, dest=None, prefix="t", overwrite=False, length=1000):
         """
@@ -61,20 +75,14 @@ class CLI(object):
         :return: None
 
         """
-        path = Path(src)
-        absolute_path = paths.get_absolute_path(path)
-        name = paths.get_destination_filename(path, prefix, overwrite)
-        dest = paths.get_destination_path(dest, absolute_path, name)
+        absolute_path, dest = self._get_paths(src, dest, prefix, overwrite)
         size = (length, length)
 
-        logger.info(f"Open the image: {absolute_path}")
-        try:
-            original_image = Image.open(absolute_path)
-        except FileNotFoundError:
-            logger.error(f"Image not found: {absolute_path}")
-        else:
-            logger.info(f"Resize the image to fit within {size[0]}*{size[1]} px.")
-            image = images.resize_image(original_image, size)
-            logger.info("Resize complete.")
-            image.save(dest)
-            logger.info(f"Image generation succeeded: {dest}")
+        original_image = self._open_image(absolute_path)
+        if original_image is None:
+            sys.exit(1)
+
+        image = self._resize_image(original_image, size)
+
+        image.save(dest)
+        logger.info(f"Image generation succeeded: {dest}")
