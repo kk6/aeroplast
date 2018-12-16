@@ -2,6 +2,10 @@
 
 Transparent PNG conversion (Mainly for Twitter)
 
+## Required packaging tool:
+
+[Poetry](https://poetry.eustace.io/)
+
 ## Usage:
 
 ### Install packages
