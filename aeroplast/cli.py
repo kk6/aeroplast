@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
+import fire
 from PIL import Image
 from logzero import logger
 
@@ -86,3 +87,7 @@ class CLI(object):
 
         image.save(dest)
         logger.info(f"Image generation succeeded: {dest}")
+
+
+def main():
+    return fire.Fire(CLI)

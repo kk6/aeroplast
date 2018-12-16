@@ -1,4 +1,5 @@
 # aeroplast
+
 Transparent PNG conversion (Mainly for Twitter)
 
 ## Usage:
@@ -6,33 +7,37 @@ Transparent PNG conversion (Mainly for Twitter)
 ### Install packages
 
 ```shell
-$ pipenv install
+$ poetry install
 ```
 
 ### Invoke commands
 
 ```shell
-$ pipenv run python -m aeroplast ...
+$ poetry run aeroplast ...
 ```
 
 or
 
 ```shell
-$ pipenv run cli ...
+$ poetry shell
+$ poetry develop
+$ aeroplast
 ```
 
 ### Convert image
 
 ```shell
-$ pipenv run cli convert original.png converted.png
+$ poetry run aeroplast convert original.png converted.png
 ```
+
 ### help
 
 ```shell
-$ pipenv run cli --help
+$ poetry run aeroplast --help
 ```
 
 ## Origin of the name
+
 ```
 aeroplast == Bubble wrap == 気泡緩衝材 == プチプチ
 ```

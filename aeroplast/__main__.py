@@ -2,10 +2,9 @@
 """
 The main entry point. Invoke as `python -m aeroplast'.
 """
-import fire
-
-from .cli import CLI
-
+import sys
 
 if __name__ == "__main__":
-    fire.Fire(CLI)
+    from .cli import main
+
+    sys.exit(main())
