@@ -25,6 +25,8 @@ logzero = "^1.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.0"
+pre-commit = "^1.12"
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
 
 [tool.poetry.scripts]
 aeroplast = "aeroplast.cli:main"
