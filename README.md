@@ -1,5 +1,7 @@
 # aeroplast
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8a948b4c79474577a00c30618f689ed8)](https://app.codacy.com/app/hiro.ashiya/aeroplast?utm_source=github.com&utm_medium=referral&utm_content=kk6/aeroplast&utm_campaign=Badge_Grade_Dashboard)
+
 Transparent PNG conversion (Mainly for Twitter)
 
 ## Required packaging tool:
