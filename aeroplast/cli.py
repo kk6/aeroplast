@@ -34,38 +34,6 @@ class CLI(object):
         logger.info("Resize complete.")
         return original_image
 
-    def convert(self, src, dest=None, prefix="t", overwrite=False, resize=False):
-        """
-        Output image with transparent PNG
-
-        :param src: Input src image filename.
-        :param dest: Output destination filename.
-        :param prefix: Prefix added to output image file name.
-        :param overwrite: Whether to overwrite the image or not.
-        :param resize: Resize the image. When only option is specified, resize to the default 900 * 900px.
-                       If you pass a number (pixel) as an optional argument, resize it to fit that size.
-        :return: None
-
-        """
-        absolute_path, dest = self._get_paths(src, dest, prefix, overwrite)
-
-        original_image = self._open_image(absolute_path)
-        if original_image is None:
-            sys.exit(1)
-
-        if resize:
-            if resize is True:
-                size = (MAX_PNG_LENGTH, MAX_PNG_LENGTH)
-            else:
-                size = (resize, resize)
-
-            original_image = self._resize_image(original_image, size)
-
-        logger.info("Image converting...")
-        image = images.add_transparent_frame(original_image)
-        image.save(dest)
-        logger.info(f"Image generation succeeded: {dest}")
-
     def resize(
         self, src, dest=None, prefix="t", overwrite=False, length=MAX_PNG_LENGTH
     ):

@@ -10,11 +10,6 @@ def src_image():
 
 
 @pytest.fixture(scope="function")
-def expected_image():
-    return Image.open("tests/images/expected.png")
-
-
-@pytest.fixture(scope="function")
 def output_image_filename():
     filename = "tests/images/output.png"
     yield filename
