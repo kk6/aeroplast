@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aeroplast"
-version = "0.1.0"
+version = "0.1.1"
 description = "Transparent PNG conversion."
 authors = ["kk6 <hiro.ashiya@gmail.com>"]
 readme = "README.md"

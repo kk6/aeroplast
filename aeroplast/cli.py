@@ -8,6 +8,8 @@ from logzero import logger
 import aeroplast.images as images
 import aeroplast.paths as paths
 
+MAX_PNG_LENGTH = 900
+
 
 class CLI(object):
     """Transparent PNG conversion"""
@@ -40,7 +42,7 @@ class CLI(object):
         :param dest: Output destination filename.
         :param prefix: Prefix added to output image file name.
         :param overwrite: Whether to overwrite the image or not.
-        :param resize: Resize the image. When only option is specified, resize to the default 1000 * 1000px.
+        :param resize: Resize the image. When only option is specified, resize to the default 900 * 900px.
                        If you pass a number (pixel) as an optional argument, resize it to fit that size.
         :return: None
 
@@ -53,7 +55,7 @@ class CLI(object):
 
         if resize:
             if resize is True:
-                size = (1000, 1000)
+                size = (MAX_PNG_LENGTH, MAX_PNG_LENGTH)
             else:
                 size = (resize, resize)
 
@@ -64,7 +66,9 @@ class CLI(object):
         image.save(dest)
         logger.info(f"Image generation succeeded: {dest}")
 
-    def resize(self, src, dest=None, prefix="t", overwrite=False, length=1000):
+    def resize(
+        self, src, dest=None, prefix="t", overwrite=False, length=MAX_PNG_LENGTH
+    ):
         """
         Resize image.
 
@@ -72,7 +76,7 @@ class CLI(object):
         :param dest: Output destination filename.
         :param prefix: Prefix added to output image file name.
         :param overwrite: Whether to overwrite the image or not.
-        :param length: default 1000 px
+        :param length: default 900 px
         :return: None
 
         """
